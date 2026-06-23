@@ -1,7 +1,7 @@
 # Butler Legal Service Website
 
-A static single-page website for Butler Legal Service, a solo attorney practice led by
-Shatrasha Butler and serving Missouri and North Carolina.
+A static single-page website for Butler Legal Service, a legal consulting and advocacy
+practice led by Shatrasha Butler.
 
 ## Files
 
@@ -15,5 +15,4 @@ Shatrasha Butler and serving Missouri and North Carolina.
 
 Open `index.html` in a browser, or publish the repository with GitHub Pages.
 
-Before publishing, replace the template phone number, email address, and policy text
-with final attorney-approved content.
+Before publishing, review the policy text and all site copy for final attorney approval.
