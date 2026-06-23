@@ -272,6 +272,7 @@ h2 {
   background: var(--gold);
   opacity: 0.9;
   transform: translateY(-1.6rem);
+  animation: accent-pulse 3.2s ease-in-out infinite;
 }
 
 h3 {
@@ -394,6 +395,16 @@ h3 {
   }
 }
 
+@keyframes accent-pulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+
 .portrait-panel span {
   display: block;
   margin-bottom: 6px;
@@ -504,6 +515,7 @@ h3 {
   height: 2px;
   margin-bottom: 42px;
   background: var(--gold);
+  animation: accent-pulse 3.2s ease-in-out infinite;
 }
 
 .service-card p {
@@ -630,6 +642,7 @@ h3 {
   border-radius: 999px;
   background: var(--gold);
   opacity: 0.95;
+  animation: accent-pulse 3.2s ease-in-out infinite;
 }
 
 .site-footer nav {
@@ -672,6 +685,7 @@ h3 {
   border-radius: 999px;
   background: var(--gold);
   opacity: 0.9;
+  animation: accent-pulse 3.2s ease-in-out infinite;
 }
 
 .legal-content h1 {
