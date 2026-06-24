@@ -1,0 +1,24 @@
+{
+  "name": "butlerlegalservice-webpage",
+  "version": "1.0.0",
+  "description": "A static single-page website for Butler Legal Service, a legal consulting and advocacy practice led by Shatrasha Butler.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NateButlerExplains/ButlerLegalService-Webpage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/NateButlerExplains/ButlerLegalService-Webpage/issues"
+  },
+  "homepage": "https://github.com/NateButlerExplains/ButlerLegalService-Webpage#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
+  }
+}
