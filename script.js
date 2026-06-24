@@ -32,6 +32,11 @@ if (navToggle && nav && header) {
 }
 
 window.addEventListener("scroll", updateHeader, { passive: true });
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 740) {
+    closeNav();
+  }
+});
 updateHeader();
 
 const revealObserver = new IntersectionObserver(

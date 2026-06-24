@@ -742,24 +742,45 @@ h3 {
     position: relative;
     z-index: 24;
     display: block;
+    flex: 0 0 auto;
   }
 
   .primary-nav {
     position: fixed;
-    inset: 0;
+    top: 82px;
+    right: 18px;
+    left: 18px;
     z-index: 22;
     display: grid;
-    align-content: center;
-    justify-items: center;
-    gap: 28px;
+    gap: 4px;
+    padding: 10px;
     color: var(--ink);
-    background: var(--paper);
-    font-family: Georgia, serif;
-    font-size: 2rem;
+    background: var(--surface);
+    border: 1px solid rgba(17, 24, 22, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 20px 52px rgba(17, 24, 22, 0.16);
+    font-size: 1rem;
+    font-weight: 760;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-12px);
+    transform: translateY(-8px);
     transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .primary-nav a {
+    display: block;
+    min-height: 46px;
+    padding: 10px 14px;
+    border-radius: 6px;
+  }
+
+  .primary-nav a:hover,
+  .primary-nav a:focus-visible {
+    background: rgba(198, 163, 93, 0.16);
+  }
+
+  .primary-nav a::after {
+    display: none;
   }
 
   .primary-nav.open {
