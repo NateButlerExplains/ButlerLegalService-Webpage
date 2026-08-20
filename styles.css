@@ -743,10 +743,6 @@ h3 {
   margin-bottom: 0.5rem;
 }
 
-.service-lede {
-  font-size: 1.12rem;
-}
-
 .cta-banner {
   margin-top: 3rem;
   padding: clamp(26px, 4vw, 40px);
@@ -945,17 +941,6 @@ h3 {
 }
 
 @media (max-width: 740px) {
-  .service-hero {
-    padding-top: 118px;
-  }
-
-  .service-hero-actions,
-  .service-hero-actions .button {
-    width: 100%;
-  }
-}
-
-@media (max-width: 740px) {
   .site-header {
     min-height: 70px;
   }
@@ -1038,6 +1023,15 @@ h3 {
 
   .hero-actions,
   .button {
+    width: 100%;
+  }
+
+  .service-hero {
+    padding-top: 118px;
+  }
+
+  .service-hero-actions,
+  .service-hero-actions .button {
     width: 100%;
   }
 
