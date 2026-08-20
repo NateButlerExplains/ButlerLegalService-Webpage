@@ -1,18 +1,53 @@
 # Butler Legal Service Website
 
-A static single-page website for Butler Legal Service, a legal consulting and advocacy
-practice led by Shatrasha Butler.
+A static website for Butler Legal Service, P.L.L.C., a legal consulting and advocacy
+practice led by Shatrasha Butler. The attorney is licensed to practice law only in
+Missouri and North Carolina.
 
-## Files
+## Pages
 
-- `index.html` - main single-page website
-- `styles.css` - responsive visual design
-- `script.js` - mobile navigation and header behavior
-- `privacy.html` - starter privacy policy page
-- `terms.html` - starter terms of use page
+- `index.html` - homepage (About, Services, Community, Contact)
+- `accident-claims.html` - Accident Claims & Injury Guidance service page
+- `estate-planning.html` - Estate & Legacy Planning service page
+- `business-legal-support.html` - Small Business Legal Support service page
+- `contract-review.html` - Contract Review & Negotiation service page
+- `disclaimer.html` - Disclaimer, sourced from the owner-supplied Disclaimer document
+- `privacy.html` - Privacy Policy, sourced from the owner-supplied Privacy Policy document
+- `terms.html` - Terms of Use, sourced from the owner-supplied Terms of Use document
+
+## Supporting files
+
+- `styles.css` - responsive visual design (dark green / warm gold / cream, serif display type)
+- `script.js` - mobile navigation, header scroll state, and scroll-reveal behavior
+- `assets/` - site imagery
+
+The homepage's four service cards link directly to the four dedicated service pages
+above. Every page's footer links to the Disclaimer, Privacy Policy, and Terms of Use.
 
 ## Preview
 
-Open `index.html` in a browser, or publish the repository with GitHub Pages.
+Open `index.html` in a browser, or serve the folder locally, e.g. `python -m http.server`
+then visit `http://localhost:8000`. The site can also be published with GitHub Pages.
 
-Before publishing, review the policy text and all site copy for final attorney approval.
+## Legal content
+
+The Disclaimer, Privacy Policy, and Terms of Use pages contain the firm's canonical legal
+text as supplied by the owner. This content should not be rewritten, shortened, or
+paraphrased without the owner's explicit direction — treat it as authoritative source
+material. Before publishing further changes, have all site copy and policy text reviewed
+by the attorney.
+
+## Testing
+
+Playwright tests live in `tests/` and cover page loads, homepage service-card links,
+footer link integrity, general internal-link integrity, and mobile navigation behavior.
+
+```
+npm install
+npx playwright install --with-deps chromium
+npm test
+```
+
+`npm test` runs `playwright test`, which serves the site locally (via
+`python -m http.server`, configured in `playwright.config.js`) and runs the suite against
+it. Python 3 must be available on the PATH to run the local test server.
