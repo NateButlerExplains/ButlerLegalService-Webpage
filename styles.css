@@ -460,6 +460,7 @@ h3 {
 }
 
 .service-card {
+  display: block;
   min-height: 320px;
   padding: clamp(28px, 4vw, 38px);
   background: rgba(255, 255, 255, 0.1);
@@ -469,10 +470,21 @@ h3 {
 }
 
 .service-card:hover,
-.service-card:focus-within {
+.service-card:focus-within,
+.service-card:focus-visible {
   transform: translateY(-4px);
   box-shadow: 0 30px 72px rgba(0, 0, 0, 0.18);
   background: rgba(255, 255, 255, 0.16);
+  outline: none;
+}
+
+.service-more {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--gold);
+  font-size: 0.86rem;
+  font-weight: 760;
+  letter-spacing: 0.04em;
 }
 
 .services {
@@ -714,6 +726,72 @@ h3 {
 .legal-content p + h2,
 .legal-content h2 + p {
   margin-top: 1.8rem;
+}
+
+.legal-content ul {
+  margin: 0 0 1.2rem;
+  padding-left: 1.3rem;
+}
+
+.legal-content li {
+  margin-bottom: 0.5rem;
+}
+
+.service-lede {
+  font-size: 1.12rem;
+}
+
+.cta-banner {
+  margin-top: 3rem;
+  padding: clamp(26px, 4vw, 40px);
+  background: var(--green);
+  border-radius: 16px;
+  color: var(--white);
+}
+
+.cta-banner h2 {
+  margin-bottom: 10px;
+  color: var(--white);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+}
+
+.cta-banner p {
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 22px;
+}
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.related-services {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.related-services li {
+  margin: 0;
+  background: var(--paper);
+}
+
+.related-services a {
+  display: block;
+  padding: 16px 20px;
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.related-services a:hover,
+.related-services a:focus-visible {
+  color: var(--green-2);
+  background: rgba(198, 163, 93, 0.12);
 }
 
 @media (max-width: 980px) {
