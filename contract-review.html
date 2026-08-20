@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <header class="site-header scrolled simple-header">
+    <header class="site-header scrolled simple-header service-header" data-header>
       <a class="brand" href="index.html" aria-label="Butler Legal Service home">
         <span class="brand-mark">B</span>
         <span>
@@ -19,7 +19,15 @@
           <small>Legal consulting and advocacy</small>
         </span>
       </a>
-      <nav class="primary-nav">
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="sr-only">Menu</span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" data-nav>
         <a href="index.html#about">About</a>
         <a href="index.html#services">Services</a>
         <a href="index.html#contact">Contact</a>
