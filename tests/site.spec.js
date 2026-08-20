@@ -6,6 +6,7 @@ const SITE_PAGES = [
   "index.html",
   "privacy.html",
   "terms.html",
+  "disclaimer.html",
   "accident-claims.html",
   "estate-planning.html",
   "business-legal-support.html",
@@ -79,6 +80,12 @@ test.describe("Legal pages", () => {
     expect(response && response.ok()).toBeTruthy();
     await expect(page.locator("h1")).toHaveText("Terms of Use");
   });
+
+  test("Disclaimer loads successfully", async ({ page }) => {
+    const response = await page.goto("/disclaimer.html");
+    expect(response && response.ok()).toBeTruthy();
+    await expect(page.locator("h1")).toHaveText("Disclaimer");
+  });
 });
 
 test.describe("Footer navigation", () => {
@@ -86,10 +93,10 @@ test.describe("Footer navigation", () => {
     test(`footer links resolve correctly from ${pageFile}`, async ({ page, request }) => {
       await page.goto(`/${pageFile}`);
       const footerLinks = page.locator(".site-footer nav a");
-      await expect(footerLinks).toHaveCount(2);
+      await expect(footerLinks).toHaveCount(3);
 
       const hrefs = await footerLinks.evaluateAll((links) => links.map((a) => a.getAttribute("href")));
-      expect(hrefs.sort()).toEqual(["privacy.html", "terms.html"]);
+      expect(hrefs.sort()).toEqual(["disclaimer.html", "privacy.html", "terms.html"]);
 
       for (const href of hrefs) {
         const res = await request.get(`/${href}`);
