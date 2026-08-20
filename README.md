@@ -11,9 +11,8 @@ Missouri and North Carolina.
 - `estate-planning.html` - Estate & Legacy Planning service page
 - `business-legal-support.html` - Small Business Legal Support service page
 - `contract-review.html` - Contract Review & Negotiation service page
-- `disclaimer.html` - Disclaimer, sourced from the owner-supplied Disclaimer document
-- `privacy.html` - Privacy Policy, sourced from the owner-supplied Privacy Policy document
-- `terms.html` - Terms of Use, sourced from the owner-supplied Terms of Use document
+- `privacy.html` - Privacy Policy
+- `terms.html` - Terms of Use
 
 ## Supporting files
 
@@ -22,15 +21,15 @@ Missouri and North Carolina.
 - `assets/` - site imagery
 
 The homepage's four service cards link directly to the four dedicated service pages
-above. Every page's footer links to the Disclaimer, Privacy Policy, and Terms of Use.
+above. Every page's footer links to the Privacy Policy and Terms of Use.
 
 The four service pages use a scannable, marketing-style layout (gold-eyebrow hero with
 a serif headline and dual CTAs, a card grid breaking down how the firm helps, a
 highlighted "What to Expect" panel, and a closing CTA strip) built from shared
 `.service-hero`, `.detail-grid`/`.detail-card`, `.highlight-panel`, and `.notice-panel`
-components in `styles.css`. The Disclaimer, Privacy Policy, and Terms of Use pages
-remain document-style (`.legal-page` / `.legal-content`) since their content is
-canonical legal text.
+components in `styles.css`. The Privacy Policy and Terms of Use pages remain
+document-style (`.legal-page` / `.legal-content`) and retain the approved text from
+the original site.
 
 ## Preview
 
@@ -39,11 +38,9 @@ then visit `http://localhost:8000`. The site can also be published with GitHub P
 
 ## Legal content
 
-The Disclaimer, Privacy Policy, and Terms of Use pages contain the firm's canonical legal
-text as supplied by the owner. This content should not be rewritten, shortened, or
-paraphrased without the owner's explicit direction — treat it as authoritative source
-material. Before publishing further changes, have all site copy and policy text reviewed
-by the attorney.
+The Privacy Policy and Terms of Use pages should not be rewritten, shortened, or
+paraphrased without the owner's explicit direction. Before publishing further changes,
+have all site copy and policy text reviewed by the attorney.
 
 ## Testing
 

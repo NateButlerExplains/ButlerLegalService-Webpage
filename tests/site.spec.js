@@ -6,7 +6,6 @@ const SITE_PAGES = [
   "index.html",
   "privacy.html",
   "terms.html",
-  "disclaimer.html",
   "accident-claims.html",
   "estate-planning.html",
   "business-legal-support.html",
@@ -69,13 +68,6 @@ test.describe("Dedicated service pages", () => {
 });
 
 test.describe("Legal pages", () => {
-  test("Disclaimer page loads successfully", async ({ page }) => {
-    const response = await page.goto("/disclaimer.html");
-    expect(response && response.ok()).toBeTruthy();
-    await expect(page.locator("h1")).toHaveText("Disclaimer");
-    await expect(page.getByText("licensed to practice law only in Missouri and North Carolina")).toBeVisible();
-  });
-
   test("Privacy Policy loads successfully", async ({ page }) => {
     const response = await page.goto("/privacy.html");
     expect(response && response.ok()).toBeTruthy();
@@ -86,7 +78,6 @@ test.describe("Legal pages", () => {
     const response = await page.goto("/terms.html");
     expect(response && response.ok()).toBeTruthy();
     await expect(page.locator("h1")).toHaveText("Terms of Use");
-    await expect(page.getByText("licensed to practice law only in Missouri and North Carolina")).toBeVisible();
   });
 });
 
@@ -95,10 +86,10 @@ test.describe("Footer navigation", () => {
     test(`footer links resolve correctly from ${pageFile}`, async ({ page, request }) => {
       await page.goto(`/${pageFile}`);
       const footerLinks = page.locator(".site-footer nav a");
-      await expect(footerLinks).toHaveCount(3);
+      await expect(footerLinks).toHaveCount(2);
 
       const hrefs = await footerLinks.evaluateAll((links) => links.map((a) => a.getAttribute("href")));
-      expect(hrefs.sort()).toEqual(["disclaimer.html", "privacy.html", "terms.html"]);
+      expect(hrefs.sort()).toEqual(["privacy.html", "terms.html"]);
 
       for (const href of hrefs) {
         const res = await request.get(`/${href}`);
