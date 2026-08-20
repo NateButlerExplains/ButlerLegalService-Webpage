@@ -66,6 +66,28 @@ test.describe("Dedicated service pages", () => {
       await expect(page.locator('.cta-actions a[href^="tel:"]')).toHaveCount(1);
     });
   }
+
+  test("service heroes do not render placeholder artifacts at desktop or mobile widths", async ({ page }) => {
+    for (const card of SERVICE_CARDS) {
+      for (const viewport of [
+        { width: 1440, height: 900 },
+        { width: 375, height: 800 },
+      ]) {
+        await page.setViewportSize(viewport);
+        await page.goto(`/${card.href}`);
+
+        const pseudoContent = await page.locator(".service-hero").evaluate((hero) =>
+          getComputedStyle(hero, "::after").content
+        );
+        expect(pseudoContent).toBe("none");
+
+        const noHorizontalOverflow = await page.evaluate(
+          () => document.documentElement.scrollWidth <= document.documentElement.clientWidth
+        );
+        expect(noHorizontalOverflow).toBeTruthy();
+      }
+    }
+  });
 });
 
 test.describe("Legal pages", () => {
