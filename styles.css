@@ -357,8 +357,8 @@ h3 {
 }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
+  opacity: 1;
+  transform: none;
   will-change: opacity, transform;
   transition: opacity 0.75s ease, transform 0.75s ease;
 }
