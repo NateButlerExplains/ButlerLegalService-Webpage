@@ -782,8 +782,11 @@ h3 {
 
 .cta-banner {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(260px, 0.7fr) auto;
-  gap: 22px clamp(24px, 5vw, 56px);
+  grid-template-columns: minmax(320px, 1fr) minmax(260px, auto);
+  grid-template-areas:
+    "heading actions"
+    "copy actions";
+  gap: 10px clamp(24px, 5vw, 56px);
   align-items: center;
   margin-top: clamp(2rem, 5vw, 3.4rem);
   padding: clamp(26px, 4vw, 42px);
@@ -796,18 +799,21 @@ h3 {
 }
 
 .cta-banner h2 {
+  grid-area: heading;
   margin-bottom: 10px;
   color: var(--white);
   font-size: clamp(1.4rem, 3vw, 1.9rem);
 }
 
 .cta-banner p {
+  grid-area: copy;
   max-width: 520px;
   color: rgba(255, 255, 255, 0.78);
   margin-bottom: 0;
 }
 
 .cta-actions {
+  grid-area: actions;
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
@@ -1100,6 +1106,24 @@ h3 {
   .cta-banner,
   .related-services {
     grid-template-columns: 1fr;
+  }
+
+  .cta-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 1100px) {
+  .cta-banner {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "heading"
+      "copy"
+      "actions";
+  }
+
+  .cta-banner p {
+    max-width: 640px;
   }
 
   .cta-actions {
