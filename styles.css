@@ -885,6 +885,21 @@ h3 {
     linear-gradient(160deg, var(--green) 0%, var(--green-2) 100%);
 }
 
+.service-hero::after {
+  position: absolute;
+  top: 118px;
+  right: clamp(20px, 6vw, 84px);
+  width: min(28vw, 360px);
+  min-width: 220px;
+  aspect-ratio: 1 / 1.08;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)),
+    linear-gradient(135deg, transparent 0 42%, rgba(198, 163, 93, 0.22) 42% 43%, transparent 43% 100%);
+  content: "";
+}
+
 .service-hero-inner {
   position: relative;
   z-index: 1;
@@ -1238,6 +1253,15 @@ h3 {
   .service-hero {
     padding-top: 106px;
     padding-bottom: 50px;
+  }
+
+  .service-hero::after {
+    top: auto;
+    right: -68px;
+    bottom: -88px;
+    width: 220px;
+    min-width: 0;
+    opacity: 0.42;
   }
 
   .service-hero-actions,
