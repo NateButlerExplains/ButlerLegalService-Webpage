@@ -827,6 +827,44 @@ h3 {
   font-size: clamp(1.05rem, 2vw, 1.28rem);
 }
 
+/* Tablet (741px–980px): moderate increase in proportions */
+@media (min-width: 741px) {
+  .service-hero {
+    padding: 100px clamp(20px, 6vw, 84px) 65px;
+  }
+
+  .service-hero-inner {
+    width: min(760px, 100%);
+  }
+
+  .service-hero h1 {
+    font-size: clamp(2rem, 5.5vw, 3rem);
+  }
+
+  .service-hero-lede {
+    max-width: 680px;
+  }
+}
+
+/* Desktop (981px+): full proportions matching reference design */
+@media (min-width: 981px) {
+  .service-hero {
+    padding: 120px clamp(20px, 6vw, 84px) 80px;
+  }
+
+  .service-hero-inner {
+    width: min(820px, 100%);
+  }
+
+  .service-hero h1 {
+    font-size: clamp(2.2rem, 5.5vw, 3.2rem);
+  }
+
+  .service-hero-lede {
+    max-width: 720px;
+  }
+}
+
 .service-hero-actions {
   display: flex;
   flex-wrap: wrap;
