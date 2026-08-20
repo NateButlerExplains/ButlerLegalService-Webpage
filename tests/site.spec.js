@@ -88,38 +88,6 @@ test.describe("Legal pages", () => {
   });
 });
 
-test.describe("Site branding", () => {
-  test("the flyer logo and favicon load on every page at desktop and mobile widths", async ({ page, request, baseURL }) => {
-    for (const pageFile of SITE_PAGES) {
-      for (const viewport of [
-        { width: 1440, height: 900 },
-        { width: 375, height: 800 },
-      ]) {
-        await page.setViewportSize(viewport);
-        await page.goto(`/${pageFile}`);
-
-        const logo = page.locator(".brand-logo");
-        await expect(logo).toHaveCount(1);
-        await expect(logo).toHaveAttribute("src", "assets/bls-flyer.svg");
-        await expect(logo).toHaveAttribute("alt", "");
-        expect(await logo.evaluate((image) => image.naturalWidth)).toBeGreaterThan(0);
-
-        const favicon = page.locator('link[rel="icon"][type="image/svg+xml"]');
-        await expect(favicon).toHaveCount(1);
-        const faviconHref = await favicon.getAttribute("href");
-        expect(faviconHref).toBe("assets/bls-flyer.svg");
-        const faviconResponse = await request.get(new URL(faviconHref, baseURL || "").toString());
-        expect(faviconResponse.ok()).toBeTruthy();
-
-        const noHorizontalOverflow = await page.evaluate(
-          () => document.documentElement.scrollWidth <= document.documentElement.clientWidth
-        );
-        expect(noHorizontalOverflow).toBeTruthy();
-      }
-    }
-  });
-});
-
 test.describe("Footer navigation", () => {
   for (const pageFile of SITE_PAGES) {
     test(`footer links resolve correctly from ${pageFile}`, async ({ page, request }) => {

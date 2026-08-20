@@ -92,14 +92,24 @@ a {
   min-width: 0;
 }
 
-.brand-logo {
-  display: block;
-  flex: 0 0 42px;
+.brand-mark {
+  display: grid;
+  place-items: center;
   width: 42px;
   height: 42px;
-  object-fit: cover;
-  object-position: center top;
-  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.site-header.scrolled .brand-mark,
+.site-header.nav-active .brand-mark {
+  border-color: var(--line);
+  background: var(--green);
 }
 
 .brand strong,
@@ -1132,10 +1142,10 @@ h3 {
     max-width: calc(100% - 58px);
   }
 
-  .brand-logo {
-    flex-basis: 34px;
+  .brand-mark {
     width: 34px;
     height: 34px;
+    font-size: 1.05rem;
   }
 
   .brand strong {
@@ -1203,6 +1213,11 @@ h3 {
 
   .service-header .primary-nav {
     display: grid;
+  }
+
+  .simple-header .brand-mark {
+    border-color: var(--line);
+    background: var(--green);
   }
 
   .hero {
