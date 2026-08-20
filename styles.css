@@ -804,17 +804,20 @@ h3 {
 /* ---------------------------------------------------------------------- */
 
 .service-hero {
-  padding: 152px clamp(20px, 6vw, 84px) 88px;
+  padding: 88px clamp(20px, 6vw, 84px) 56px;
   color: var(--white);
   background: linear-gradient(160deg, var(--green) 0%, var(--green-2) 100%);
 }
 
 .service-hero-inner {
-  width: min(760px, 100%);
+  width: min(700px, 100%);
 }
 
 .service-hero h1 {
+  max-width: 100%;
+  margin-bottom: 18px;
   color: var(--white);
+  font-size: clamp(1.8rem, 5.5vw, 2.8rem);
 }
 
 .service-hero-lede {
