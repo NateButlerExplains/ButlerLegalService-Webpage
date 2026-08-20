@@ -429,9 +429,15 @@ h3 {
 .section-copy p,
 .section-heading p,
 .approach-copy p,
-.contact p {
+.contact p,
+.section-intro p {
   color: var(--muted);
   font-size: 1.04rem;
+}
+
+.section-intro {
+  max-width: 760px;
+  margin-bottom: clamp(28px, 4vw, 40px);
 }
 
 .portrait-panel {
@@ -460,6 +466,7 @@ h3 {
 }
 
 .service-card {
+  display: block;
   min-height: 320px;
   padding: clamp(28px, 4vw, 38px);
   background: rgba(255, 255, 255, 0.1);
@@ -469,10 +476,21 @@ h3 {
 }
 
 .service-card:hover,
-.service-card:focus-within {
+.service-card:focus-within,
+.service-card:focus-visible {
   transform: translateY(-4px);
   box-shadow: 0 30px 72px rgba(0, 0, 0, 0.18);
   background: rgba(255, 255, 255, 0.16);
+  outline: none;
+}
+
+.service-more {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--gold);
+  font-size: 0.86rem;
+  font-weight: 760;
+  letter-spacing: 0.04em;
 }
 
 .services {
@@ -716,6 +734,317 @@ h3 {
   margin-top: 1.8rem;
 }
 
+.legal-content ul {
+  margin: 0 0 1.2rem;
+  padding-left: 1.3rem;
+}
+
+.legal-content li {
+  margin-bottom: 0.5rem;
+}
+
+.cta-banner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px clamp(24px, 5vw, 56px);
+  align-items: center;
+  margin-top: clamp(2rem, 5vw, 3.4rem);
+  padding: clamp(26px, 4vw, 42px);
+  background:
+    linear-gradient(135deg, rgba(198, 163, 93, 0.16), transparent 38%),
+    var(--green);
+  border: 1px solid rgba(198, 163, 93, 0.32);
+  border-radius: 8px;
+  color: var(--white);
+}
+
+.cta-banner h2 {
+  margin-bottom: 10px;
+  color: var(--white);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+}
+
+.cta-banner p {
+  max-width: 520px;
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 0;
+}
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: flex-end;
+}
+
+.related-services {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.related-services li {
+  margin: 0;
+  background: var(--paper);
+}
+
+.related-services a {
+  position: relative;
+  display: block;
+  min-height: 78px;
+  padding: 18px 42px 18px 20px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-weight: 650;
+  box-shadow: 0 12px 30px rgba(17, 24, 22, 0.05);
+}
+
+.related-services a::after {
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  color: var(--gold);
+  content: "\2192";
+  transform: translateY(-50%);
+  transition: transform 180ms ease;
+}
+
+.related-services a:hover,
+.related-services a:focus-visible {
+  color: var(--green-2);
+  background: rgba(198, 163, 93, 0.12);
+}
+
+.related-services a:hover::after,
+.related-services a:focus-visible::after {
+  transform: translate(4px, -50%);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Service detail pages (marketing-style layout for the four service      */
+/* pages: accident-claims, estate-planning, business-legal-support,       */
+/* contract-review). Extends existing brand components rather than        */
+/* introducing a parallel design system.                                  */
+/* ---------------------------------------------------------------------- */
+
+.service-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 108px clamp(20px, 6vw, 84px) 72px;
+  color: var(--white);
+  background:
+    linear-gradient(115deg, rgba(17, 24, 22, 0.22), transparent 52%),
+    linear-gradient(160deg, var(--green) 0%, var(--green-2) 100%);
+}
+
+.service-hero::after {
+  position: absolute;
+  top: 118px;
+  right: clamp(20px, 6vw, 84px);
+  width: min(28vw, 360px);
+  min-width: 220px;
+  aspect-ratio: 1 / 1.08;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)),
+    linear-gradient(135deg, transparent 0 42%, rgba(198, 163, 93, 0.22) 42% 43%, transparent 43% 100%);
+  content: "";
+}
+
+.service-hero-inner {
+  position: relative;
+  z-index: 1;
+  width: min(760px, 100%);
+}
+
+.service-hero h1 {
+  max-width: 100%;
+  margin-bottom: 20px;
+  color: var(--white);
+  font-size: clamp(2.1rem, 5.5vw, 3.55rem);
+}
+
+.service-hero-lede {
+  max-width: 680px;
+  margin-bottom: 34px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: clamp(1.05rem, 2vw, 1.28rem);
+}
+
+/* Tablet (741px–980px): moderate increase in proportions */
+@media (min-width: 741px) {
+  .service-hero {
+    padding: 116px clamp(20px, 6vw, 84px) 76px;
+  }
+
+  .service-hero-inner {
+    width: min(800px, 100%);
+  }
+
+  .service-hero h1 {
+    font-size: clamp(2.35rem, 5.5vw, 3.65rem);
+  }
+
+  .service-hero-lede {
+    max-width: 700px;
+  }
+}
+
+/* Desktop (981px+): full proportions matching reference design */
+@media (min-width: 981px) {
+  .service-hero {
+    min-height: 520px;
+    padding: 126px clamp(20px, 6vw, 84px) 88px;
+  }
+
+  .service-hero-inner {
+    width: min(840px, 100%);
+  }
+
+  .service-hero h1 {
+    font-size: clamp(2.7rem, 5.2vw, 4.45rem);
+  }
+
+  .service-hero-lede {
+    max-width: 720px;
+  }
+}
+
+.service-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.service-breadcrumb {
+  display: block;
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.service-breadcrumb a {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.service-breadcrumb a:hover,
+.service-breadcrumb a:focus-visible {
+  color: var(--gold);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: clamp(16px, 3vw, 26px);
+}
+
+.detail-card {
+  padding: clamp(24px, 4vw, 32px);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 18px 46px rgba(17, 24, 22, 0.07);
+}
+
+.detail-card-icon {
+  display: block;
+  width: 38px;
+  height: 2px;
+  margin-bottom: 18px;
+  background: var(--gold);
+  animation: accent-pulse 3.2s ease-in-out infinite;
+}
+
+.detail-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.detail-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.97rem;
+}
+
+.highlight-panel {
+  max-width: 940px;
+  padding: clamp(28px, 5vw, 44px);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--gold);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+.highlight-panel p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.highlight-panel p + p {
+  margin-top: 1em;
+}
+
+.notice-panel {
+  padding: clamp(22px, 4vw, 30px);
+  background: var(--soft);
+  border-left: 4px solid var(--gold);
+  border-radius: 4px;
+}
+
+.notice-panel p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.notice-panel a {
+  color: var(--green-2);
+  font-weight: 760;
+}
+
+.service-section-alt {
+  background: var(--soft);
+}
+
+.service-hero + .section {
+  padding-top: clamp(54px, 7vw, 84px);
+}
+
+.section-intro {
+  max-width: 850px;
+  margin-bottom: clamp(26px, 4vw, 38px);
+}
+
+.section-intro h2 {
+  max-width: 780px;
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+}
+
+.section-intro p:not(.eyebrow) {
+  max-width: 720px;
+  color: var(--muted);
+}
+
+.service-section-alt .section-intro {
+  margin-bottom: 22px;
+}
+
+.related-services-heading {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  margin-bottom: 20px;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+}
+
 @media (max-width: 980px) {
   .split,
   .section-heading,
@@ -726,6 +1055,15 @@ h3 {
 
   .service-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cta-banner,
+  .related-services {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-actions {
+    justify-content: flex-start;
   }
 }
 
@@ -793,6 +1131,10 @@ h3 {
     display: none;
   }
 
+  .service-header .primary-nav {
+    display: grid;
+  }
+
   .simple-header .brand-mark {
     border-color: var(--line);
     background: var(--green);
@@ -813,6 +1155,33 @@ h3 {
   .hero-actions,
   .button {
     width: 100%;
+  }
+
+  .service-hero {
+    padding-top: 112px;
+    padding-bottom: 54px;
+  }
+
+  .service-hero::after {
+    top: auto;
+    right: -68px;
+    bottom: -88px;
+    width: 220px;
+    min-width: 0;
+    opacity: 0.42;
+  }
+
+  .service-hero-actions,
+  .service-hero-actions .button {
+    width: 100%;
+  }
+
+  .section-intro h2 {
+    font-size: clamp(1.85rem, 8vw, 2.35rem);
+  }
+
+  .cta-banner {
+    padding: 24px;
   }
 
   .service-grid {
