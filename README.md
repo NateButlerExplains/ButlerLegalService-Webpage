@@ -24,6 +24,14 @@ Missouri and North Carolina.
 The homepage's four service cards link directly to the four dedicated service pages
 above. Every page's footer links to the Disclaimer, Privacy Policy, and Terms of Use.
 
+The four service pages use a scannable, marketing-style layout (gold-eyebrow hero with
+a serif headline and dual CTAs, a card grid breaking down how the firm helps, a
+highlighted "What to Expect" panel, and a closing CTA strip) built from shared
+`.service-hero`, `.detail-grid`/`.detail-card`, `.highlight-panel`, and `.notice-panel`
+components in `styles.css`. The Disclaimer, Privacy Policy, and Terms of Use pages
+remain document-style (`.legal-page` / `.legal-content`) since their content is
+canonical legal text.
+
 ## Preview
 
 Open `index.html` in a browser, or serve the folder locally, e.g. `python -m http.server`
