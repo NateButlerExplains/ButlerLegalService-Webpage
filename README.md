@@ -13,6 +13,7 @@ Missouri and North Carolina.
 - `contract-review.html` - Contract Review & Negotiation service page
 - `privacy.html` - Privacy Policy
 - `terms.html` - Terms of Use
+- `disclaimer.html` - Disclaimer
 
 ## Supporting files
 
@@ -21,15 +22,15 @@ Missouri and North Carolina.
 - `assets/` - site imagery
 
 The homepage's four service cards link directly to the four dedicated service pages
-above. Every page's footer links to the Privacy Policy and Terms of Use.
+above. Every page's footer links to the Privacy Policy, Terms of Use, and Disclaimer.
 
 The four service pages use a scannable, marketing-style layout (gold-eyebrow hero with
 a serif headline and dual CTAs, a card grid breaking down how the firm helps, a
 highlighted "What to Expect" panel, and a closing CTA strip) built from shared
 `.service-hero`, `.detail-grid`/`.detail-card`, `.highlight-panel`, and `.notice-panel`
-components in `styles.css`. The Privacy Policy and Terms of Use pages remain
+components in `styles.css`. The Privacy Policy, Terms of Use, and Disclaimer pages remain
 document-style (`.legal-page` / `.legal-content`) and retain the approved text from
-the original site.
+the approved legal source documents.
 
 ## Preview
 
@@ -38,9 +39,9 @@ then visit `http://localhost:8000`. The site can also be published with GitHub P
 
 ## Legal content
 
-The Privacy Policy and Terms of Use pages should not be rewritten, shortened, or
-paraphrased without the owner's explicit direction. Before publishing further changes,
-have all site copy and policy text reviewed by the attorney.
+The Privacy Policy, Terms of Use, and Disclaimer pages should not be rewritten,
+shortened, or paraphrased without the owner's explicit direction. Before publishing
+further changes, have all site copy and policy text reviewed by the attorney.
 
 ## Testing
 
@@ -55,4 +56,5 @@ npm test
 
 `npm test` runs `playwright test`, which serves the site locally (via
 `python -m http.server`, configured in `playwright.config.js`) and runs the suite against
-it. Python 3 must be available on the PATH to run the local test server.
+it. Python 3 must be available on the PATH to run the local test server. If port `4173`
+is already in use, run with `PLAYWRIGHT_PORT=<free-port> npm test`.
