@@ -19,7 +19,7 @@ Missouri and North Carolina.
 
 - `styles.css` - responsive visual design (dark green / warm gold / cream, serif display type)
 - `script.js` - mobile navigation, header scroll state, and scroll-reveal behavior
-- `assets/` - site imagery
+- `assets/` - site imagery plus the approved SVG brand mark used for the header logo and favicon
 
 The homepage's four service cards link directly to the four dedicated service pages
 above. Every page's footer links to the Privacy Policy, Terms of Use, and Disclaimer.
@@ -46,7 +46,8 @@ further changes, have all site copy and policy text reviewed by the attorney.
 ## Testing
 
 Playwright tests live in `tests/` and cover page loads, homepage service-card links,
-footer link integrity, general internal-link integrity, and mobile navigation behavior.
+footer link integrity, general internal-link integrity, branding/favicons, service hero
+rendering, and mobile navigation behavior.
 
 ```
 npm install
