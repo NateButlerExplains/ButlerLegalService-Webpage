@@ -709,6 +709,14 @@ h3 {
   background: linear-gradient(180deg, var(--paper) 0%, #f8f3eb 98%);
 }
 
+/* Long unbreakable strings (email addresses, URLs) must wrap on narrow screens,
+   including devices without Georgia or Inter where fallback glyphs run wider. */
+.legal-content,
+.site-footer,
+.contact {
+  overflow-wrap: anywhere;
+}
+
 .legal-content {
   position: relative;
   width: min(920px, calc(100% - 48px));
