@@ -216,3 +216,27 @@ test.describe("SEO essentials", () => {
     expect(data.telephone).toBe("+1-980-500-0565");
   });
 });
+
+test.describe("Performance hygiene", () => {
+  test("the homepage hero is self-hosted, sized, and prioritized; other images lazy-load", async ({ page }) => {
+    await page.goto("/index.html");
+    const hero = page.locator(".hero-media img");
+    await expect(hero).toHaveCount(1);
+    const src = await hero.getAttribute("src");
+    expect(src).toMatch(/^assets\//);
+    await expect(hero).toHaveAttribute("width", /\d+/);
+    await expect(hero).toHaveAttribute("height", /\d+/);
+    await expect(hero).toHaveAttribute("fetchpriority", "high");
+    expect(await hero.evaluate((image) => image.naturalWidth)).toBeGreaterThan(0);
+
+    const external = await page.locator('img[src^="http"]').count();
+    expect(external, "no hotlinked images").toBe(0);
+
+    const belowFold = page.locator("main img:not(.hero-media img):not(.brand-logo)");
+    const count = await belowFold.count();
+    for (let i = 0; i < count; i += 1) {
+      await expect(belowFold.nth(i)).toHaveAttribute("loading", "lazy");
+      await expect(belowFold.nth(i)).toHaveAttribute("width", /\d+/);
+    }
+  });
+});
