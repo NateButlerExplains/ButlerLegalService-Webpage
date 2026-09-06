@@ -24,7 +24,7 @@
     <meta name="twitter:description" content="Butler Legal Service supports individuals and businesses with legal consulting, self-advocacy, claims, personal injury matters, business matters, and contracts.">
     <meta name="twitter:image" content="https://butlerlegalservice.com/assets/og-image.jpg">
     <meta name="theme-color" content="#18382f">
-    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preload" as="image" type="image/webp" imagesrcset="assets/hero-768.webp 768w, assets/hero-1280.webp 1280w, assets/hero-1920.webp 1920w" imagesizes="100vw">
 
     <script type="application/ld+json">
     {
@@ -75,10 +75,10 @@
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-media" aria-hidden="true">
-          <img
-            src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1800&q=82"
-            alt=""
-          >
+          <picture>
+            <source type="image/webp" srcset="assets/hero-768.webp 768w, assets/hero-1280.webp 1280w, assets/hero-1920.webp 1920w" sizes="100vw">
+            <img src="assets/hero-1920.jpg" width="1920" height="1280" alt="" fetchpriority="high" decoding="async">
+          </picture>
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content reveal">
@@ -114,10 +114,10 @@
           </p>
         </div>
         <div class="portrait-panel reveal">
-          <img
-            src="assets/shatrasha-headshot.jpg"
-            alt="Attorney Shatrasha Butler"
-          >
+          <picture>
+            <source type="image/webp" srcset="assets/shatrasha-headshot.webp">
+            <img src="assets/shatrasha-headshot.jpg" width="720" height="1080" alt="Attorney Shatrasha Butler" loading="lazy" decoding="async">
+          </picture>
           <div>
             <span>Attorney</span>
             <strong>Shatrasha Butler</strong>
@@ -143,11 +143,10 @@
               support makes sense for the path ahead.
             </p>
           </div>
-          <img
-            class="services-image reveal reveal-delay-1"
-            src="assets/professional-handshake.jpg"
-            alt="Professional handshake during a business meeting"
-          >
+          <picture>
+            <source type="image/webp" srcset="assets/professional-handshake.webp">
+            <img class="services-image reveal reveal-delay-1" src="assets/professional-handshake.jpg" width="1000" height="667" alt="Professional handshake during a business meeting" loading="lazy" decoding="async">
+          </picture>
         </div>
 
         <div class="service-grid">
