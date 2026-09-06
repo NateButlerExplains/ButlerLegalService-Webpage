@@ -13,7 +13,7 @@ module.exports = defineConfig({
     trace: "on-first-retry",
   },
   webServer: {
-    command: `python -m http.server ${port}`,
+    command: `python3 -m http.server ${port}`,
     url: `${baseURL}/index.html`,
     reuseExistingServer: !process.env.CI,
     timeout: 30 * 1000,

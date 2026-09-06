@@ -111,7 +111,7 @@ test.describe("Legal pages", () => {
 });
 
 test.describe("Site branding", () => {
-  test("the flyer logo and favicon load on every page at desktop and mobile widths", async ({ page, request, baseURL }) => {
+  test("the brand mark and favicon load on every page at desktop and mobile widths", async ({ page, request, baseURL }) => {
     for (const pageFile of SITE_PAGES) {
       for (const viewport of [
         { width: 1440, height: 900 },
@@ -122,14 +122,14 @@ test.describe("Site branding", () => {
 
         const logo = page.locator(".brand-logo");
         await expect(logo).toHaveCount(1);
-        await expect(logo).toHaveAttribute("src", "assets/bls-flyer.svg");
+        await expect(logo).toHaveAttribute("src", "assets/brand-mark.png");
         await expect(logo).toHaveAttribute("alt", "");
         expect(await logo.evaluate((image) => image.naturalWidth)).toBeGreaterThan(0);
 
-        const favicon = page.locator('link[rel="icon"][type="image/svg+xml"]');
+        const favicon = page.locator('link[rel="icon"][type="image/png"]');
         await expect(favicon).toHaveCount(1);
         const faviconHref = await favicon.getAttribute("href");
-        expect(faviconHref).toBe("assets/bls-flyer.svg");
+        expect(faviconHref).toBe("assets/favicon-32.png");
         const faviconResponse = await request.get(new URL(faviconHref, baseURL || "").toString());
         expect(faviconResponse.ok()).toBeTruthy();
 
@@ -180,4 +180,39 @@ test.describe("Link integrity", () => {
       }
     });
   }
+});
+
+test.describe("SEO essentials", () => {
+  test("every page declares a canonical URL and Open Graph tags", async ({ page }) => {
+    for (const pageFile of SITE_PAGES) {
+      await page.goto(`/${pageFile}`);
+      const expected = pageFile === "index.html"
+        ? "https://butlerlegalservice.com/"
+        : `https://butlerlegalservice.com/${pageFile}`;
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", expected);
+      await expect(page.locator('meta[property="og:title"]')).toHaveCount(1);
+      await expect(page.locator('meta[property="og:image"]')).toHaveCount(1);
+      await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
+    }
+  });
+
+  test("robots.txt, sitemap.xml, the OG image, and the 404 page are served", async ({ request, baseURL }) => {
+    for (const path of ["robots.txt", "sitemap.xml", "assets/og-image.jpg", "404.html"]) {
+      const response = await request.get(new URL(path, baseURL || "").toString());
+      expect(response.ok(), path).toBeTruthy();
+    }
+    const sitemap = await (await request.get(new URL("sitemap.xml", baseURL || "").toString())).text();
+    for (const pageFile of SITE_PAGES) {
+      const loc = pageFile === "index.html" ? "https://butlerlegalservice.com/" : `https://butlerlegalservice.com/${pageFile}`;
+      expect(sitemap, loc).toContain(`<loc>${loc}</loc>`);
+    }
+  });
+
+  test("the homepage carries LegalService structured data", async ({ page }) => {
+    await page.goto("/index.html");
+    const json = await page.locator('script[type="application/ld+json"]').textContent();
+    const data = JSON.parse(json || "{}");
+    expect(data["@type"]).toBe("LegalService");
+    expect(data.telephone).toBe("+1-980-500-0565");
+  });
 });

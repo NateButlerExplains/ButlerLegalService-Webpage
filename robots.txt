@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /tests/
+Disallow: /scripts/
+Disallow: /node_modules/
+
+Sitemap: https://butlerlegalservice.com/sitemap.xml
