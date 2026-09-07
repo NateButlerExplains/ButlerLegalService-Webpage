@@ -351,3 +351,34 @@ test.describe("Contact form", () => {
     await expect(status.locator('a[href="tel:+15732768656"]')).toBeVisible();
   });
 });
+
+test.describe("Analytics", () => {
+  const TOKEN = "e2e70fdfebb24f2a930ec0ba04de5c7e";
+
+  test("every page carries the analytics beacon with the right token", async ({ page }) => {
+    for (const pageFile of [...SITE_PAGES, "404.html"]) {
+      await page.goto(`/${pageFile}`);
+      const beacon = page.locator('script[src*="cloudflareinsights.com"]');
+      await expect(beacon, pageFile).toHaveCount(1);
+      const config = await beacon.getAttribute("data-cf-beacon");
+      expect(JSON.parse(config).token, pageFile).toBe(TOKEN);
+    }
+  });
+
+  test("the privacy policy discloses the analytics before it is used", async ({ page }) => {
+    await page.goto("/privacy.html");
+    const body = (await page.locator("body").innerText()).replace(/\s+/g, " ");
+    expect(body).toContain("Cloudflare Web Analytics");
+    expect(body).toContain("does not use cookies");
+    expect(body).toContain("does not collect information that identifies you personally");
+  });
+
+  test("no other third-party tracker is present", async ({ page }) => {
+    await page.goto("/index.html");
+    const srcs = await page.locator("script[src]").evaluateAll((nodes) => nodes.map((n) => n.src));
+    const external = srcs.filter((s) => !s.includes("butlerlegalservice") && !s.startsWith("http://127.0.0.1") && !s.startsWith("http://localhost"));
+    for (const src of external) {
+      expect(src, "only the analytics beacon may be third-party").toContain("cloudflareinsights.com");
+    }
+  });
+});
