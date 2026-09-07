@@ -271,3 +271,83 @@ test.describe("Contact details", () => {
     await expect(page.locator(`a[href="${PHONE_HREF}"]`).first()).toBeVisible();
   });
 });
+
+test.describe("Contact form", () => {
+  const ENDPOINT = "https://forms.example.test/f/abc123";
+
+  // Serve the homepage with an endpoint configured, so the real code path runs.
+  async function withEndpoint(page, { failing = false } = {}) {
+    await page.route("**/index.html", async (route) => {
+      const response = await route.fetch();
+      const body = (await response.text()).replace('data-endpoint=""', `data-endpoint="${ENDPOINT}"`);
+      await route.fulfill({ response, body, headers: { ...response.headers(), "content-type": "text/html" } });
+    });
+    await page.route(`${ENDPOINT}**`, (route) =>
+      route.fulfill({ status: failing ? 500 : 200, contentType: "application/json", body: "{}" })
+    );
+    await page.goto("/index.html");
+  }
+
+  test("stays hidden while no endpoint is configured", async ({ page }) => {
+    await page.goto("/index.html");
+    const form = page.locator("#contact-form");
+    await expect(form).toHaveCount(1);
+    await expect(form).toBeHidden();
+    expect(await form.getAttribute("data-endpoint")).toBe("");
+  });
+
+  test("carries the approved notice and a required acknowledgement", async ({ page }) => {
+    await page.goto("/index.html");
+    const notice = await page.locator("#cf-notice").innerText();
+    expect(notice).toContain("does not create an");
+    expect(notice).toContain("attorney-client relationship");
+    expect(notice).toContain("Do not send confidential information");
+
+    // The same sentence the attorney already approved in the footer.
+    const footer = await page.locator(".site-footer").innerText();
+    const squash = (s) => s.replace(/\s+/g, " ").trim();
+    expect(squash(footer)).toContain(squash(notice));
+
+    await expect(page.locator("#cf-ack")).toHaveAttribute("required", "");
+    for (const id of ["cf-name", "cf-email", "cf-message"]) {
+      await expect(page.locator(`#${id}`)).toHaveAttribute("required", "");
+    }
+  });
+
+  test("appears once configured and refuses to send an incomplete message", async ({ page }) => {
+    await withEndpoint(page);
+    const form = page.locator("#contact-form");
+    await expect(form).toBeVisible();
+
+    let posted = false;
+    page.on("request", (r) => { if (r.url().startsWith(ENDPOINT)) posted = true; });
+
+    await form.locator('button[type="submit"]').click();
+    await expect(page.locator(".form-status")).toContainText("correct the highlighted fields");
+    expect(posted, "nothing should be sent when the form is invalid").toBe(false);
+    await expect(page.locator("#cf-name")).toHaveAttribute("aria-invalid", "true");
+  });
+
+  test("sends a complete message and confirms it", async ({ page }) => {
+    await withEndpoint(page);
+    await page.fill("#cf-name", "Jordan Reeves");
+    await page.fill("#cf-email", "jordan@example.com");
+    await page.fill("#cf-message", "I would like to ask about a contract review.");
+    await page.check("#cf-ack");
+    await page.locator('#contact-form button[type="submit"]').click();
+    await expect(page.locator(".form-status")).toContainText("Thank you");
+    await expect(page.locator("#cf-name")).toHaveValue("");
+  });
+
+  test("points the visitor at phone and email when sending fails", async ({ page }) => {
+    await withEndpoint(page, { failing: true });
+    await page.fill("#cf-name", "Jordan Reeves");
+    await page.fill("#cf-email", "jordan@example.com");
+    await page.fill("#cf-message", "Testing the failure path.");
+    await page.check("#cf-ack");
+    await page.locator('#contact-form button[type="submit"]').click();
+    const status = page.locator(".form-status");
+    await expect(status).toContainText("did not send");
+    await expect(status.locator('a[href="tel:+15732768656"]')).toBeVisible();
+  });
+});
