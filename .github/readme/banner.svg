@@ -20,7 +20,7 @@
   <g transform="translate(84,72)">
     <rect x="0" y="0" width="176" height="176" rx="6" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
     <rect x="14" y="14" width="148" height="148" rx="3" fill="none" stroke="#c6a35d" stroke-opacity="0.35" stroke-width="1"/>
-    <text x="88" y="118" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="92" fill="#fbfaf6" letter-spacing="-2">B<tspan fill="#c6a35d">L</tspan></text>
+    <text x="88" y="112" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="66" fill="#fbfaf6" letter-spacing="1">B<tspan fill="#c6a35d">L</tspan>S</text>
     <line x1="40" y1="140" x2="136" y2="140" stroke="url(#gold)" stroke-width="2"/>
   </g>
 
