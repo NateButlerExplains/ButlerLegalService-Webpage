@@ -213,7 +213,7 @@ test.describe("SEO essentials", () => {
     const json = await page.locator('script[type="application/ld+json"]').textContent();
     const data = JSON.parse(json || "{}");
     expect(data["@type"]).toBe("LegalService");
-    expect(data.telephone).toBe("+1-980-500-0565");
+    expect(data.telephone).toBe("+1-573-276-8656");
   });
 });
 
@@ -238,5 +238,36 @@ test.describe("Performance hygiene", () => {
       await expect(belowFold.nth(i)).toHaveAttribute("loading", "lazy");
       await expect(belowFold.nth(i)).toHaveAttribute("width", /\d+/);
     }
+  });
+});
+
+test.describe("Contact details", () => {
+  const PHONE_DISPLAY = "573-276-8656";
+  const PHONE_HREF = "tel:+15732768656";
+
+  test("every page uses the same phone number, and no page carries the old one", async ({ page }) => {
+    for (const pageFile of [...SITE_PAGES, "404.html"]) {
+      await page.goto(`/${pageFile}`);
+      const body = (await page.locator("body").innerText()).replace(/\u00a0/g, " ");
+      expect(body, `${pageFile} must not show a retired number`).not.toContain("980-500-0565");
+
+      const telLinks = page.locator('a[href^="tel:"]');
+      const count = await telLinks.count();
+      for (let i = 0; i < count; i += 1) {
+        const href = await telLinks.nth(i).getAttribute("href");
+        expect(href, `${pageFile} tel link`).toBe(PHONE_HREF);
+      }
+      if (body.includes("573-276-8656")) {
+        expect(count, `${pageFile} shows the number, so it should be callable`).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  test("the homepage states the licensing limits and carries the callable number", async ({ page }) => {
+    await page.goto("/index.html");
+    const body = await page.locator("body").innerText();
+    expect(body).toContain("licensed to practice law only in Missouri and North Carolina");
+    expect(body).toContain(PHONE_DISPLAY);
+    await expect(page.locator(`a[href="${PHONE_HREF}"]`).first()).toBeVisible();
   });
 });
