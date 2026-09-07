@@ -38,8 +38,10 @@
 | **DNS** | GoDaddy (`CNAME` file in repo points Pages at the domain) |
 | **Stack** | Hand-written HTML, CSS, and a small vanilla JS file. No framework, no build step. |
 | **Tests** | Playwright, Chromium. Link integrity, branding, service heroes, mobile nav. |
-| **Content owner** | Butler Legal Service, P.L.L.C. Attorney approves all copy. |
+| **Practice** | Virtual, by appointment. No street address is published. |
+| **Content owner** | Butler Legal Service, P.L.L.C. **Shatrasha Butler is the sole approver of wording.** No one else can sign off on copy. |
 | **Maintainer** | [Nate Butler](https://github.com/NateButlerExplains). Attorney emails change requests with page name and exact wording. |
+| **Reporting back** | Email her a short summary after any content or wording change. Routine maintenance (dependencies, tests, build) needs no email. |
 
 ## Screens
 
@@ -131,6 +133,7 @@ Pages rebuilds automatically. Watch the run under **Actions → pages build and 
 - [ ] Any copy change has attorney sign-off; legal pages use her exact text
 - [ ] Checked at phone width
 - [ ] Commit message says what changed and why, in words the attorney could read
+- [ ] If wording changed, email the attorney a short summary of what is now live
 
 ---
 
