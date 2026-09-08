@@ -628,6 +628,106 @@ h3 {
   box-shadow: var(--shadow);
 }
 
+/* ---------- Contact form ----------
+   Sits under the contact panel. Hidden until script.js sees a configured endpoint. */
+.contact-form {
+  margin-top: 28px;
+  padding: clamp(26px, 4vw, 40px);
+  border: 1px solid var(--line);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.contact-form h3 {
+  margin: 0 0 20px;
+  font-family: Georgia, serif;
+  font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+}
+
+.contact-form .field { margin-bottom: 18px; }
+
+.contact-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.contact-form .optional { font-weight: 400; color: var(--muted); }
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.contact-form textarea { resize: vertical; min-height: 120px; }
+
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
+  border-color: var(--green);
+}
+
+.contact-form input[aria-invalid="true"],
+.contact-form textarea[aria-invalid="true"] { border-color: #a8341f; }
+
+.contact-form .error {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #8f2a18;
+}
+
+.contact-form .form-notice {
+  margin: 22px 0 14px;
+  padding: 14px 16px;
+  border-left: 3px solid var(--gold);
+  background: var(--soft);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.contact-form .field.checkbox {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.contact-form .field.checkbox input { margin-top: 3px; width: 18px; height: 18px; }
+.contact-form .field.checkbox label { margin: 0; font-weight: 400; font-size: 0.92rem; }
+
+/* Spam trap: off-screen rather than display:none, which some bots skip. */
+.contact-form .hp {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.contact-form button[type="submit"] { margin-top: 8px; }
+.contact-form button[disabled] { opacity: 0.6; cursor: progress; }
+
+.contact-form .form-status {
+  margin: 14px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.contact-form .form-status.ok { color: #14532d; font-weight: 600; }
+.contact-form .form-status.bad { color: #8f2a18; font-weight: 600; }
+
 .phone-link {
   display: block;
   margin-bottom: 8px;

@@ -240,6 +240,55 @@
             </div>
           </dl>
         </div>
+
+        <!-- Contact form.
+             Hidden until data-endpoint holds a real form URL. A form that posts nowhere would
+             swallow client enquiries silently, so "not configured" must mean "not shown".
+             To switch it on: create a form at formspree.io that delivers to
+             inquiries@butlerlegalservice.com, then paste its URL into data-endpoint below. -->
+        <form class="contact-form reveal reveal-delay-2" id="contact-form" data-endpoint="" hidden novalidate>
+          <h3>Or send a message</h3>
+
+          <div class="field">
+            <label for="cf-name">Name</label>
+            <input id="cf-name" name="name" type="text" autocomplete="name" required>
+          </div>
+
+          <div class="field">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" autocomplete="email" required>
+          </div>
+
+          <div class="field">
+            <label for="cf-phone">Phone <span class="optional">(optional)</span></label>
+            <input id="cf-phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+
+          <div class="field">
+            <label for="cf-message">How can we help?</label>
+            <textarea id="cf-message" name="message" rows="5" required></textarea>
+          </div>
+
+          <p class="form-notice" id="cf-notice">
+            This website is for general informational purposes only and does not create an
+            attorney-client relationship. Do not send confidential information until an
+            attorney-client relationship has been established.
+          </p>
+
+          <div class="field checkbox">
+            <input id="cf-ack" name="acknowledged" type="checkbox" value="yes" required aria-describedby="cf-notice">
+            <label for="cf-ack">I have read and understand the notice above.</label>
+          </div>
+
+          <!-- Spam trap. Real people never fill a field they cannot see. -->
+          <div class="hp" aria-hidden="true">
+            <label for="cf-company">Company</label>
+            <input id="cf-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button class="button primary full" type="submit">Send message</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
         <div class="notice-panel reveal">
           <p>
             Butler Legal Service, P.L.L.C. is a consulting and advocacy-focused practice and is not
