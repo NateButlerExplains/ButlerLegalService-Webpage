@@ -244,8 +244,16 @@
         <!-- Contact form.
              Hidden until data-endpoint holds a real form URL. A form that posts nowhere would
              swallow client enquiries silently, so "not configured" must mean "not shown".
-             To switch it on: create a form at formspree.io that delivers to
-             inquiries@butlerlegalservice.com, then paste its URL into data-endpoint below. -->
+             To switch it on, paste the form service's POST URL into data-endpoint below.
+             The form sends FormData with an Accept: application/json header and treats any
+             2xx as success, so most services work without further changes.
+
+             Provider choice is not incidental here. Every hosted form service stores the
+             message body on its own servers, and prospective clients type matter detail into
+             this box, so pick on data handling rather than price. Formspree in particular
+             forbids "sensitive personal data" in its own Privacy Policy, which is exactly what
+             a legal intake field collects. Check the honeypot too: this form uses _gotcha,
+             which only some services recognise. -->
         <form class="contact-form reveal reveal-delay-2" id="contact-form" data-endpoint="" hidden novalidate>
           <h3>Or send a message</h3>
 
