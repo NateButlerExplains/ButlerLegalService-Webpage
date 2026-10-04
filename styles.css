@@ -92,14 +92,15 @@ a {
   min-width: 0;
 }
 
+/* The mark is a full-length figure, so it is sized by height and never cropped.
+   The negative margin lets it stand taller than the text without making the header taller. */
 .brand-logo {
   display: block;
-  flex: 0 0 42px;
-  width: 42px;
-  height: 42px;
-  object-fit: cover;
-  object-position: center top;
-  overflow: hidden;
+  flex: 0 0 auto;
+  width: auto;
+  height: 60px;
+  margin-block: -6px;
+  object-fit: contain;
 }
 
 .brand strong,
@@ -1231,9 +1232,8 @@ h3 {
   }
 
   .brand-logo {
-    flex-basis: 34px;
-    width: 34px;
-    height: 34px;
+    height: 48px;
+    margin-block: -4px;
   }
 
   .brand strong {
