@@ -122,14 +122,22 @@ test.describe("Site branding", () => {
 
         const logo = page.locator(".brand-logo");
         await expect(logo).toHaveCount(1);
-        await expect(logo).toHaveAttribute("src", "assets/brand-mark.png");
+        await expect(logo).toHaveAttribute("src", "assets/brand-mark.png?v=2");
         await expect(logo).toHaveAttribute("alt", "");
         expect(await logo.evaluate((image) => image.naturalWidth)).toBeGreaterThan(0);
+        // The mark is a full-length figure: it must be shown whole, never cropped to a square.
+        const shape = await logo.evaluate((image) => ({
+          natural: image.naturalWidth / image.naturalHeight,
+          shown: image.clientWidth / image.clientHeight,
+          fit: getComputedStyle(image).objectFit,
+        }));
+        expect(shape.fit, `${pageFile} brand mark object-fit`).toBe("contain");
+        expect(Math.abs(shape.shown - shape.natural), `${pageFile} brand mark is cropped or stretched`).toBeLessThan(0.03);
 
         const favicon = page.locator('link[rel="icon"][type="image/png"]');
         await expect(favicon).toHaveCount(1);
         const faviconHref = await favicon.getAttribute("href");
-        expect(faviconHref).toBe("assets/favicon-32.png");
+        expect(faviconHref).toBe("assets/favicon-32.png?v=2");
         const faviconResponse = await request.get(new URL(faviconHref, baseURL || "").toString());
         expect(faviconResponse.ok()).toBeTruthy();
 
