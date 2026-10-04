@@ -132,6 +132,7 @@ Pages rebuilds automatically. Watch the run under **Actions → pages build and 
 - [ ] `npm test` passes
 - [ ] Any copy change has attorney sign-off; legal pages use her exact text
 - [ ] Checked at phone width
+- [ ] If `styles.css`, `script.js`, the brand mark or an icon changed, the `?v=` number on its links went up on every page
 - [ ] Commit message says what changed and why, in words the attorney could read
 - [ ] If wording changed, email the attorney a short summary of what is now live
 
