@@ -146,7 +146,7 @@ if (contactForm) {
         status.className = "form-status ok";
       } catch (error) {
         status.innerHTML =
-          'Sorry, that did not send. Please call <a href="tel:+15732768656">573-276-8656</a> or email <a href="mailto:inquiries@butlerlegalservice.com">inquiries@butlerlegalservice.com</a>.';
+          'Sorry, that did not send. Please call <a href="tel:+19805000565">980-500-0565</a> or email <a href="mailto:inquiries@butlerlegalservice.com">inquiries@butlerlegalservice.com</a>.';
         status.className = "form-status bad";
       } finally {
         button.disabled = false;
