@@ -213,7 +213,7 @@ test.describe("SEO essentials", () => {
     const json = await page.locator('script[type="application/ld+json"]').textContent();
     const data = JSON.parse(json || "{}");
     expect(data["@type"]).toBe("LegalService");
-    expect(data.telephone).toBe("+1-573-276-8656");
+    expect(data.telephone).toBe("+1-980-500-0565");
   });
 });
 
@@ -242,14 +242,14 @@ test.describe("Performance hygiene", () => {
 });
 
 test.describe("Contact details", () => {
-  const PHONE_DISPLAY = "573-276-8656";
-  const PHONE_HREF = "tel:+15732768656";
+  const PHONE_DISPLAY = "980-500-0565";
+  const PHONE_HREF = "tel:+19805000565";
 
   test("every page uses the same phone number, and no page carries the old one", async ({ page }) => {
     for (const pageFile of [...SITE_PAGES, "404.html"]) {
       await page.goto(`/${pageFile}`);
       const body = (await page.locator("body").innerText()).replace(/\u00a0/g, " ");
-      expect(body, `${pageFile} must not show a retired number`).not.toContain("980-500-0565");
+      expect(body, `${pageFile} must not show a retired number`).not.toContain("573-276-8656");
 
       const telLinks = page.locator('a[href^="tel:"]');
       const count = await telLinks.count();
@@ -257,7 +257,7 @@ test.describe("Contact details", () => {
         const href = await telLinks.nth(i).getAttribute("href");
         expect(href, `${pageFile} tel link`).toBe(PHONE_HREF);
       }
-      if (body.includes("573-276-8656")) {
+      if (body.includes(PHONE_DISPLAY)) {
         expect(count, `${pageFile} shows the number, so it should be callable`).toBeGreaterThan(0);
       }
     }
@@ -348,7 +348,7 @@ test.describe("Contact form", () => {
     await page.locator('#contact-form button[type="submit"]').click();
     const status = page.locator(".form-status");
     await expect(status).toContainText("did not send");
-    await expect(status.locator('a[href="tel:+15732768656"]')).toBeVisible();
+    await expect(status.locator('a[href="tel:+19805000565"]')).toBeVisible();
   });
 });
 
