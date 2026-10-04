@@ -110,6 +110,27 @@ test.describe("Legal pages", () => {
   });
 });
 
+test.describe("Cache versioning", () => {
+  // GitHub Pages caches files for 10 minutes and its CDN can lag a deploy, so a page can load with a new
+  // image and an old stylesheet. A version in the URL makes the page and its files change together.
+  test("every page loads its stylesheet, script, mark and icons from versioned URLs", async ({ page }) => {
+    for (const pageFile of [...SITE_PAGES, "404.html"]) {
+      await page.goto(`/${pageFile}`);
+      const urls = await page.evaluate(() => [
+        ...[...document.querySelectorAll('link[rel="stylesheet"]')].map((el) => el.getAttribute("href")),
+        ...[...document.querySelectorAll("script[src]")].map((el) => el.getAttribute("src")),
+        ...[...document.querySelectorAll('link[rel="icon"], link[rel="apple-touch-icon"]')].map((el) => el.getAttribute("href")),
+        document.querySelector(".brand-logo").getAttribute("src"),
+      ]);
+      const ownFiles = urls.filter((url) => url && !/^https?:/.test(url));
+      expect(ownFiles.length, `${pageFile} should link its own stylesheet, script, icons and mark`).toBeGreaterThanOrEqual(5);
+      for (const url of ownFiles) {
+        expect(url, `${pageFile}: ${url} needs a ?v= version`).toMatch(/\?v=\d+$/);
+      }
+    }
+  });
+});
+
 test.describe("Site branding", () => {
   test("the brand mark and favicon load on every page at desktop and mobile widths", async ({ page, request, baseURL }) => {
     for (const pageFile of SITE_PAGES) {
